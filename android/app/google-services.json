@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "356515403152",
+    "project_id": "shoesly-afed7",
+    "storage_bucket": "shoesly-afed7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356515403152:android:78e7a9d9604bf2ff004f15",
+        "android_client_info": {
+          "package_name": "com.app.shoesly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_EI5TYaX4rRO1wdiYxJL9cc5UNEWa1ng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
