@@ -17,6 +17,7 @@ class AppTheme {
       brightness: Brightness.light,
       useMaterial3: true,
       textTheme: _textTheme,
+      fontFamily: "Urbanist",
       // appBarTheme: _lightAppBarTheme,
       // iconTheme: const IconThemeData(
       //   color: AppColors.primarycolor,

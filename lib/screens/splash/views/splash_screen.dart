@@ -22,6 +22,7 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     var height = MediaQuery.sizeOf(context).height;
     // var width = MediaQuery.sizeOf(context).width;
 
@@ -29,10 +30,10 @@ class SplashView extends StatelessWidget {
       body: BlocListener<SplashCubit, bool>(
         listener: (context, state) {
           if (state == true) {
-            // Navigator.of(context).pushNamedAndRemoveUntil(
-            //   DiscoverScreen.routeName,
-            //   (route) => false,
-            // );
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              DiscoverScreen.routeName,
+              (route) => false,
+            );
           }
         },
         child: Center(
@@ -40,14 +41,15 @@ class SplashView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Welcome to",
+                "Welcome to Shoesly",
+                style: theme.textTheme.headlineLarge,
+              ),
+              SizedBox(
+                height: height * 0.05,
               ),
               const CircularProgressIndicator(
                 color: AppColors.primaryColorDarkest,
               ),
-              // SizedBox(
-              //   height: height * 0.05,
-              // ),
             ],
           ),
         ),

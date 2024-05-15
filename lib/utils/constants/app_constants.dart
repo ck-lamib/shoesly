@@ -1,3 +1,5 @@
-//store app constant like app name
+// splash screen delay
+final int splashScreenDelay = 3;
 
-var requestDelay = 2;
+//app padding constants
+final double appHorizontalPadding = 30.0;

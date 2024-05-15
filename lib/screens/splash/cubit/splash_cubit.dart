@@ -6,7 +6,11 @@ class SplashCubit extends Cubit<bool> {
   }
 
   void _navigate() async {
-    await Future.delayed(const Duration(seconds: 3));
-    emit(true);
+    await Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        emit(true);
+      },
+    );
   }
 }
