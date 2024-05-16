@@ -17,18 +17,22 @@ class AppTheme {
       brightness: Brightness.light,
       useMaterial3: true,
       textTheme: _textTheme,
+      colorScheme: const ColorScheme.light(
+        background: AppColors.whiteColor,
+      ),
+
       fontFamily: "Urbanist",
-      // appBarTheme: _lightAppBarTheme,
+      appBarTheme: _lightAppBarTheme,
       // iconTheme: const IconThemeData(
       //   color: AppColors.primarycolor,
       // ),
       // icon
       // textButtonTheme: _lightTextButtonTheme,
       // listTileTheme: _lightListTileTheme,
-      // tabBarTheme: _lightTabBarTheme,
-      // floatingActionButtonTheme: _lightFloatingActionButtonTheme,
+      tabBarTheme: _lightTabBarTheme,
+      floatingActionButtonTheme: _lightFloatingActionButtonTheme,
       // bottomAppBarTheme: _lightBottomAppBarTheme,
-      // elevatedButtonTheme: _lightElevatedButtonTheme,
+      elevatedButtonTheme: _lightElevatedButtonTheme,
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20),
         prefixIconColor: AppColors.primaryColorDefault,
@@ -84,25 +88,65 @@ class AppTheme {
     );
   }
 
-  // static AppBarTheme get _lightAppBarTheme {
-  //   return const AppBarTheme().copyWith(
-  //     elevation: 0,
-  //     scrolledUnderElevation: 0,
-  //     titleTextStyle: const TextStyle(
-  //       color: AppColors.primaryColorDefault,
-  //       fontWeight: FontWeight.w800,
-  //       fontSize: 22,
-  //     ),
-  //     // actionsIconTheme: const IconThemeData(
-  //     //   color: AppColors.textcolor,
-  //     // ),
-  //     systemOverlayStyle: const SystemUiOverlayStyle(
-  //       statusBarColor: AppColors.primarycolordark,
-  //       statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-  //       statusBarBrightness: Brightness.light, // For iOS (dark icons)
-  //     ),
-  //   );
-  // }
+  static FloatingActionButtonThemeData get _lightFloatingActionButtonTheme {
+    return const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primaryColorDefault,
+      foregroundColor: AppColors.whiteColor,
+    );
+  }
+
+  static ElevatedButtonThemeData get _lightElevatedButtonTheme {
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        alignment: Alignment.center,
+        backgroundColor: AppColors.primaryColorDefault,
+        foregroundColor: AppColors.whiteColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(100),
+          ),
+        ),
+        maximumSize: const Size.fromHeight(
+          50,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        textStyle: _textTheme.labelLarge,
+        splashFactory: InkRipple.splashFactory,
+      ),
+    );
+  }
+
+  static TabBarTheme get _lightTabBarTheme {
+    return TabBarTheme(
+      labelStyle: _textTheme.headlineMedium,
+      unselectedLabelStyle: _textTheme.headlineMedium,
+      labelColor: AppColors.primaryColorDefault,
+      unselectedLabelColor: AppColors.primaryColorLighter,
+      indicator: const BoxDecoration(),
+      splashFactory: NoSplash.splashFactory,
+      labelPadding: const EdgeInsets.only(right: 20),
+    );
+  }
+
+  static AppBarTheme get _lightAppBarTheme {
+    return const AppBarTheme().copyWith(
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      // titleTextStyle: const TextStyle(
+      //   color: AppColors.primaryColorDefault,
+      //   fontWeight: FontWeight.w800,
+      //   fontSize: 22,
+      // ),
+      // // actionsIconTheme: const IconThemeData(
+      // //   color: AppColors.textcolor,
+      // // ),
+      // systemOverlayStyle: const SystemUiOverlayStyle(
+      //   statusBarColor: AppColors.primarycolordark,
+      //   statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+      //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
+      // ),
+    );
+  }
 
   // static TextButtonThemeData get _lightTextButtonTheme {
   //   return TextButtonThemeData(
@@ -139,37 +183,10 @@ class AppTheme {
   //   );
   // }
 
-//   static FloatingActionButtonThemeData get _lightFloatingActionButtonTheme {
-//     return const FloatingActionButtonThemeData(
-//       backgroundColor: AppColors.primarycolor,
-//       foregroundColor: AppColors.backgroundColor,
-//     );
-//   }
-
 //   static BottomAppBarTheme get _lightBottomAppBarTheme {
 //     return const BottomAppBarTheme(
 //       color: AppColors.whiteColor,
 //       elevation: 50,
-//     );
-//   }
-
-//   static ElevatedButtonThemeData get _lightElevatedButtonTheme {
-//     return ElevatedButtonThemeData(
-//       style: ElevatedButton.styleFrom(
-//         alignment: Alignment.center,
-//         backgroundColor: AppColors.primarycolor,
-//         foregroundColor: AppColors.backgroundColor,
-//         shape: const RoundedRectangleBorder(
-//           borderRadius: BorderRadius.all(
-//             Radius.circular(8),
-//           ),
-//         ),
-//         padding: const EdgeInsets.symmetric(vertical: 16),
-//         textStyle: _textTheme.labelLarge?.copyWith(
-//           color: AppColors.backgroundColor,
-//         ),
-//         splashFactory: InkRipple.splashFactory,
-//       ),
 //     );
 //   }
 }

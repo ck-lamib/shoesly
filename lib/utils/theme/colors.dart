@@ -6,13 +6,22 @@ abstract class AppColors {
   //primary-darkest
   static const Color primaryColorDarkest = Color(0xFF070304);
   //primary-darker
-  static const Color primaryColorDarker = Color(0xFF0D0B0B);
+  static const Color primaryColorDarker = Color(0xFF090506);
+  static const Color primaryColorDark = Color(0xFF0D0B0B);
   //primary-default
   static const Color primaryColorDefault = Color(0xFF101010);
+  //primary-light
+  static const Color primaryColorLight = Color(0xFF6F6F6F);
   //primary-lighter
-  static const Color primaryColorLighter = Color(0xFF6F6F6F);
+  static const Color primaryColorLighter = Color(0xFFB7B7B7);
   //primary-lightest
-  static const Color primaryColorLightest = Color(0xFFFFFFFF);
+  static const Color primaryColorLightest = Color(0xFFF3F3F3);
+  //white color
+  static const Color whiteColor = Color(0xFFFFFFFF);
+  //border color
+  static const Color borderColor = Color(0xFFE7E7E7);
+  //border color
+  static const Color greyColor = Color(0xFF648B8B);
 
   //success
   //success-darkest

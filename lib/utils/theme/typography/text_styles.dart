@@ -1,10 +1,12 @@
 import 'package:flutter/widgets.dart';
+import 'package:shoesly/utils/theme/colors.dart';
 import 'package:shoesly/utils/theme/typography/font_weights.dart';
 
 /// App Text Style Definitions
 class AppTextStyle {
   static const _baseTextStyle = TextStyle(
     fontWeight: AppFontWeight.regular,
+    color: AppColors.primaryColorDefault,
   );
 
   /// Button Text Style
@@ -59,7 +61,7 @@ class AppTextStyle {
   static TextStyle get titleSmall {
     return _baseTextStyle.copyWith(
       fontSize: 11,
-      fontWeight: AppFontWeight.regular,
+      fontWeight: AppFontWeight.bold,
     );
   }
 

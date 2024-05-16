@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoesly/screens/discover/views/discover_screen.dart';
+import 'package:shoesly/screens/product/views/product_detail_screen.dart';
 import 'package:shoesly/screens/splash/views/splash_screen.dart';
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -22,15 +23,15 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
           arguments: settings.arguments,
         ),
       );
-    // //login screen route
-    // case LoginScreen.routeName:
-    //   return MaterialPageRoute(
-    //     builder: (_) => const LoginScreen(),
-    //     settings: RouteSettings(
-    //       name: settings.name,
-    //       arguments: settings.arguments,
-    //     ),
-    //   );
+    //discover- product-detail
+    case ProductDetailScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const ProductDetailScreen(),
+        settings: RouteSettings(
+          name: settings.name,
+          arguments: settings.arguments,
+        ),
+      );
 
     // //dashboard-routes
     // case DashboardScreen.routeName:
