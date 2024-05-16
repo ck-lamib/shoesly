@@ -2,6 +2,7 @@ class AppAssetsRoutes {
   // assets/svgs/
   static const String svgPath = "assets/svgs";
   static const String cartPath = "$svgPath/cart.svg";
+  static const String cartWithoutBadgePath = "$svgPath/cart_without_badge.svg";
   static const String starPath = "$svgPath/star.svg";
   static const String filterPath = "$svgPath/filter.svg";
   static const String arrowBackPath = "$svgPath/arrowLeft.svg";

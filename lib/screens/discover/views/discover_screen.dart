@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shoesly/screens/filter/views/filter_screen.dart';
 import 'package:shoesly/screens/product/widget/product_list_potrait_tile.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
 import 'package:shoesly/utils/constants/enums.dart';
@@ -128,7 +129,9 @@ class DiscoverView extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(FilterScreen.routeName);
+          },
           icon: SvgPicture.asset(AppAssetsRoutes.filterPath),
           label: Text(
             "Filter".toUpperCase(),

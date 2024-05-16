@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoesly/screens/discover/views/discover_screen.dart';
+import 'package:shoesly/screens/filter/views/filter_screen.dart';
 import 'package:shoesly/screens/product/views/product_detail_screen.dart';
 import 'package:shoesly/screens/splash/views/splash_screen.dart';
 
@@ -32,34 +33,22 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
           arguments: settings.arguments,
         ),
       );
-
-    // //dashboard-routes
-    // case DashboardScreen.routeName:
-    //   return MaterialPageRoute(
-    //     builder: (_) => const DashboardScreen(),
-    //     settings: RouteSettings(
-    //       name: settings.name,
-    //       arguments: settings.arguments,
-    //     ),
-    //   );
-
-    // //homescreen
-    // case HomeScreen.routeName:
-    //   return MaterialPageRoute(
-    //     builder: (_) => const HomeScreen(),
-    //     settings: RouteSettings(
-    //       name: settings.name,
-    //       arguments: settings.arguments,
-    //     ),
-    //   );
+    //filter-screen
+    case FilterScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const FilterScreen(),
+        settings: RouteSettings(
+          name: settings.name,
+          arguments: settings.arguments,
+        ),
+      );
 
     default:
       return MaterialPageRoute(
-        builder: (_) => Scaffold(
+        builder: (_) => const Scaffold(
           body: Center(
             child: Text(
-              "",
-              // AppLocalizations.of(_)!.appPageRouteNotFound(settings.name ?? ""),
+              "Page Not Found",
               textAlign: TextAlign.center,
             ),
           ),

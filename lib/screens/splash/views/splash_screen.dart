@@ -10,18 +10,6 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SplashCubit>(
-      create: (context) => SplashCubit(),
-      child: const SplashView(),
-    );
-  }
-}
-
-class SplashView extends StatelessWidget {
-  const SplashView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var height = MediaQuery.sizeOf(context).height;
     // var width = MediaQuery.sizeOf(context).width;

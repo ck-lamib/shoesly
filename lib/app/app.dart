@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoesly/screens/splash/cubit/splash_cubit.dart';
 import 'package:shoesly/screens/splash/views/splash_screen.dart';
 import 'package:shoesly/utils/routes/app_routes.dart';
 import 'package:shoesly/utils/theme/theme_config.dart';
@@ -10,7 +12,20 @@ class ShoeslyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ShoeslyAppView();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SplashCubit>(
+          create: (context) => SplashCubit(),
+        ),
+        // BlocProvider(
+        //   create: (context) => SubjectBloc(),
+        // ),
+        // BlocProvider(
+        //   create: (context) => SubjectBloc(),
+        // ),
+      ],
+      child: const ShoeslyAppView(),
+    );
   }
 }
 

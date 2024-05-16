@@ -33,6 +33,8 @@ class AppTheme {
       floatingActionButtonTheme: _lightFloatingActionButtonTheme,
       // bottomAppBarTheme: _lightBottomAppBarTheme,
       elevatedButtonTheme: _lightElevatedButtonTheme,
+      outlinedButtonTheme: _lightOutlinedButtonTheme,
+
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20),
         prefixIconColor: AppColors.primaryColorDefault,
@@ -105,6 +107,27 @@ class AppTheme {
           borderRadius: BorderRadius.all(
             Radius.circular(100),
           ),
+        ),
+        maximumSize: const Size.fromHeight(
+          50,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        textStyle: _textTheme.labelLarge,
+        splashFactory: InkRipple.splashFactory,
+      ),
+    );
+  }
+
+  static OutlinedButtonThemeData get _lightOutlinedButtonTheme {
+    return OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        alignment: Alignment.center,
+        foregroundColor: AppColors.primaryColorDefault,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(100)),
+        ),
+        side: const BorderSide(
+          color: AppColors.borderColor,
         ),
         maximumSize: const Size.fromHeight(
           50,

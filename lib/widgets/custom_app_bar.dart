@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
+import 'package:shoesly/utils/theme/typography/font_weights.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -51,7 +52,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         scrolledUnderElevation: 0,
         leading: leading ??
             (hasLeading
-                ? InkWell(
+                ? GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
                     },
@@ -62,8 +63,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 : null),
         automaticallyImplyLeading: automaticallyImplyLeading,
         title: title != null
-            ? Text(title!,
-                style: titleTextStyle ?? Theme.of(context).textTheme.titleLarge)
+            ? Text(
+                title!,
+                style: titleTextStyle ??
+                    Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: AppFontWeight.semiBold,
+                        ),
+              )
             : titleWidget,
         actions: actions,
         elevation: 0,

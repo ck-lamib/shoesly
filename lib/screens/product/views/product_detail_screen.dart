@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -46,7 +47,7 @@ class ProductDetailView extends StatelessWidget {
       appBar: CustomAppBar(
         actions: [
           SvgPicture.asset(
-            AppAssetsRoutes.cartPath,
+            AppAssetsRoutes.cartWithoutBadgePath,
           ),
         ],
       ),
@@ -153,6 +154,15 @@ class ProductDetailView extends StatelessWidget {
               ReviewTile(),
               ReviewTile(),
               ReviewTile(),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: Size.fromHeight(50),
+                ),
+                onPressed: () {},
+                child: Text(
+                  "See all reviews".toUpperCase(),
+                ),
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -160,8 +170,58 @@ class ProductDetailView extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const Row(
-        children: [],
+      bottomNavigationBar: Container(
+        height: kBottomNavigationBarHeight + 40,
+        padding: EdgeInsets.symmetric(
+          horizontal: appHorizontalPadding,
+        ),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 0),
+            blurStyle: BlurStyle.outer,
+            blurRadius: 30,
+            color: AppColors.shadowColor.withOpacity(0.5),
+            spreadRadius: 0,
+          ),
+        ]),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Price",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: AppColors.primaryColorLighter,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      text: "\$",
+                      style: theme.textTheme.headlineMedium,
+                      children: const [
+                        TextSpan(
+                          text: "235,00",
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text("Add to cart"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
