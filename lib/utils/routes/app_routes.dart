@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shoesly/screens/cart/views/cart_screen.dart';
 import 'package:shoesly/screens/discover/views/discover_screen.dart';
 import 'package:shoesly/screens/filter/views/filter_screen.dart';
+import 'package:shoesly/screens/order/views/order_screen.dart';
 import 'package:shoesly/screens/product/views/product_detail_screen.dart';
 import 'package:shoesly/screens/review/views/review_screen.dart';
 import 'package:shoesly/screens/splash/views/splash_screen.dart';
@@ -47,6 +49,24 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     case ReviewScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const ReviewScreen(),
+        settings: RouteSettings(
+          name: settings.name,
+          arguments: settings.arguments,
+        ),
+      );
+    //cart-screen
+    case CartScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const CartScreen(),
+        settings: RouteSettings(
+          name: settings.name,
+          arguments: settings.arguments,
+        ),
+      );
+    //order-screen
+    case OrderScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const OrderScreen(),
         settings: RouteSettings(
           name: settings.name,
           arguments: settings.arguments,

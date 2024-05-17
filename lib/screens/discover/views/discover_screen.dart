@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shoesly/screens/cart/views/cart_screen.dart';
 import 'package:shoesly/screens/filter/views/filter_screen.dart';
 import 'package:shoesly/screens/product/widget/product_list_potrait_tile.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
@@ -45,8 +47,13 @@ class DiscoverView extends StatelessWidget {
                         "Discover",
                         style: theme.textTheme.headlineLarge,
                       ),
-                      SvgPicture.asset(
-                        AppAssetsRoutes.cartPath,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(CartScreen.routeName);
+                        },
+                        child: SvgPicture.asset(
+                          AppAssetsRoutes.cartPath,
+                        ),
                       ),
                     ],
                   ),

@@ -24,6 +24,8 @@ abstract class AppColors {
   static const Color greyColor = Color(0xFF648B8B);
   //shadow color
   static const Color shadowColor = Color(0xFFD7D7D7);
+  //secondary dark color
+  static const Color secondaryDarkColor = Color(0xFF666666);
 
   //success
   //success-darkest

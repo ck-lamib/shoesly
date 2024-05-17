@@ -34,6 +34,7 @@ class AppTheme {
       // bottomAppBarTheme: _lightBottomAppBarTheme,
       elevatedButtonTheme: _lightElevatedButtonTheme,
       outlinedButtonTheme: _lightOutlinedButtonTheme,
+      textButtonTheme: _lightTextButtonButtonTheme,
       bottomSheetTheme: BottomSheetThemeData(
           backgroundColor: AppColors.whiteColor,
           modalBackgroundColor: AppColors.whiteColor,
@@ -104,6 +105,26 @@ class AppTheme {
         alignment: Alignment.center,
         backgroundColor: AppColors.primaryColorDefault,
         foregroundColor: AppColors.whiteColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(100),
+          ),
+        ),
+        maximumSize: const Size.fromHeight(
+          50,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        textStyle: _textTheme.labelLarge,
+        splashFactory: InkRipple.splashFactory,
+      ),
+    );
+  }
+
+  static TextButtonThemeData get _lightTextButtonButtonTheme {
+    return TextButtonThemeData(
+      style: TextButton.styleFrom(
+        alignment: Alignment.center,
+        foregroundColor: AppColors.primaryColorDefault,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(100),
