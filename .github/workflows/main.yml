@@ -16,6 +16,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.19.5'
           channel: 'stable'
 
       - name: Run Flutter Analyze
@@ -34,11 +35,12 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: '12.x'
+          java-version: '11'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.19.5'
           channel: 'stable'
 
       - name: Restore Gradle Cache
@@ -71,13 +73,16 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.19.5'
           channel: 'stable'
 
-      - name: Run lint
-        run: ./gradlew lintDebug
+      - name: Run Flutter Analyze
+        run: |
+          flutter analyze > analysis_result.txt
+          cat analysis_result.txt
 
       - name: Upload Lint Report
         uses: actions/upload-artifact@v2
         with:
-          name: lint.html
-          path: app/build/reports/lint-results-debug.html
+          name: analysis_result.txt
+          path: analysis_result.txt
