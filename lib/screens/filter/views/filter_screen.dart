@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/screens/filter/bloc/filter_bloc.dart';
@@ -9,7 +8,6 @@ import 'package:shoesly/utils/theme/colors.dart';
 import 'package:shoesly/utils/theme/typography/font_weights.dart';
 import 'package:shoesly/widgets/custom_app_bar.dart';
 
-import '../../product/cubit/product_image_carousel/product_image_carousel_cubit.dart';
 
 class FilterScreen extends StatelessWidget {
   static const String routeName = "/filter-screen";
@@ -35,7 +33,7 @@ class FilterView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: appHorizontalPadding,
           ),
           child: Column(
@@ -380,7 +378,7 @@ class FilterView extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         height: kBottomNavigationBarHeight + 40,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: appHorizontalPadding,
         ),
         decoration: BoxDecoration(boxShadow: [

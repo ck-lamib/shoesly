@@ -1,14 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shoesly/screens/filter/bloc/filter_bloc.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
-import 'package:shoesly/utils/constants/enums.dart';
-import 'package:shoesly/utils/helpers/logger.dart';
-import 'package:shoesly/utils/routes/app_assets_routes.dart';
 import 'package:shoesly/utils/theme/colors.dart';
 import 'package:shoesly/utils/theme/typography/font_weights.dart';
 import 'package:shoesly/widgets/custom_app_bar.dart';
@@ -36,7 +27,7 @@ class OrderView extends StatelessWidget {
         title: "Order Summary",
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: appHorizontalPadding),
+        padding: const EdgeInsets.symmetric(horizontal: appHorizontalPadding),
         children: [
           Text(
             "Information",
@@ -44,7 +35,7 @@ class OrderView extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           ListTile(
@@ -59,19 +50,19 @@ class OrderView extends StatelessWidget {
                 color: AppColors.secondaryDarkColor,
               ),
             ),
-            trailing: Icon(
+            trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 16,
               color: AppColors.primaryColorLighter,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          Divider(
+          const Divider(
             color: AppColors.primaryColorLighter,
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           ListTile(
@@ -86,13 +77,13 @@ class OrderView extends StatelessWidget {
                 color: AppColors.secondaryDarkColor,
               ),
             ),
-            trailing: Icon(
+            trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 16,
               color: AppColors.primaryColorLighter,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Text(
@@ -101,105 +92,101 @@ class OrderView extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Jordan 1 Retro High Tie Dye laksd flasd",
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: AppFontWeight.semiBold,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Jordan 1 Retro High Tie Dye laksd flasd",
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: AppFontWeight.semiBold,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Nike . Red Grey . 40",
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: AppColors.secondaryDarkColor,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Nike . Red Grey . 40",
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: AppColors.secondaryDarkColor,
+                  Text.rich(
+                    TextSpan(
+                      text: "\$",
+                      style: theme.textTheme.titleLarge,
+                      children: const [
+                        TextSpan(
+                          text: "235,00",
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      ],
                     ),
-                    Text.rich(
-                      TextSpan(
-                        text: "\$",
-                        style: theme.textTheme.titleLarge,
-                        children: const [
-                          TextSpan(
-                            text: "235,00",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ],
+              )
+            ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Jordan 1 Retro High Tie Dye laksd flasd",
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: AppFontWeight.semiBold,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Jordan 1 Retro High Tie Dye laksd flasd",
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: AppFontWeight.semiBold,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Nike . Red Grey . 40",
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: AppColors.secondaryDarkColor,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Nike . Red Grey . 40",
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: AppColors.secondaryDarkColor,
+                  Text.rich(
+                    TextSpan(
+                      text: "\$",
+                      style: theme.textTheme.titleLarge,
+                      children: const [
+                        TextSpan(
+                          text: "235,00",
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      ],
                     ),
-                    Text.rich(
-                      TextSpan(
-                        text: "\$",
-                        style: theme.textTheme.titleLarge,
-                        children: const [
-                          TextSpan(
-                            text: "235,00",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ],
+              )
+            ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Text(
@@ -208,122 +195,116 @@ class OrderView extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(
-                    "Sub Total ",
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: AppColors.secondaryDarkColor,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  "Sub Total ",
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: AppColors.secondaryDarkColor,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Text.rich(
-                  TextSpan(
-                    text: "\$",
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: AppFontWeight.semiBold,
-                    ),
-                    children: const [
-                      TextSpan(
-                        text: "235,00",
-                      ),
-                    ],
+              ),
+              Text.rich(
+                TextSpan(
+                  text: "\$",
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: AppFontWeight.semiBold,
                   ),
+                  children: const [
+                    TextSpan(
+                      text: "235,00",
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(
-                    "Shipping",
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: AppColors.secondaryDarkColor,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  "Shipping",
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: AppColors.secondaryDarkColor,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Text.rich(
-                  TextSpan(
-                    text: "\$",
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: AppFontWeight.semiBold,
-                    ),
-                    children: const [
-                      TextSpan(
-                        text: "20,00",
-                      ),
-                    ],
+              ),
+              Text.rich(
+                TextSpan(
+                  text: "\$",
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: AppFontWeight.semiBold,
                   ),
+                  children: const [
+                    TextSpan(
+                      text: "20,00",
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Divider(
+          const Divider(
             color: AppColors.primaryColorLighter,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(
-                    "Total Order",
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: AppColors.secondaryDarkColor,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  "Total Order",
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: AppColors.secondaryDarkColor,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Text.rich(
-                  TextSpan(
-                    text: "\$",
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: AppFontWeight.semiBold,
-                    ),
-                    children: const [
-                      TextSpan(
-                        text: "20,00",
-                      ),
-                    ],
+              ),
+              Text.rich(
+                TextSpan(
+                  text: "\$",
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: AppFontWeight.semiBold,
                   ),
+                  children: const [
+                    TextSpan(
+                      text: "20,00",
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],
       ),
       bottomNavigationBar: Container(
         height: kBottomNavigationBarHeight + 40,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: appHorizontalPadding,
         ),
         decoration: BoxDecoration(boxShadow: [

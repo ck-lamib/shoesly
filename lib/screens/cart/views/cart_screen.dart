@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shoesly/screens/filter/bloc/filter_bloc.dart';
 import 'package:shoesly/screens/order/views/order_screen.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
-import 'package:shoesly/utils/constants/enums.dart';
 import 'package:shoesly/utils/helpers/logger.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
 import 'package:shoesly/utils/theme/colors.dart';
@@ -37,7 +32,7 @@ class CartView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Slidable(
-          key: Key("0"),
+          key: const Key("0"),
           endActionPane: ActionPane(
             closeThreshold: 0.9,
             motion: const ScrollMotion(),
@@ -111,7 +106,7 @@ class CartView extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: appHorizontalPadding,
             ),
             child: Row(
@@ -140,7 +135,7 @@ class CartView extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Expanded(
@@ -158,7 +153,7 @@ class CartView extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Text(
@@ -169,7 +164,7 @@ class CartView extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -198,26 +193,26 @@ class CartView extends StatelessWidget {
                                     CustomLogger.trace("tap remove");
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.all(2),
+                                    padding: const EdgeInsets.all(2),
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                           color: AppColors.primaryColorLighter,
                                         ),
                                         shape: BoxShape.circle),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.remove,
                                       color: AppColors.primaryColorLighter,
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 15,
                                 ),
                                 Text(
                                   "1",
                                   style: theme.textTheme.titleLarge,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 15,
                                 ),
                                 GestureDetector(
@@ -225,13 +220,13 @@ class CartView extends StatelessWidget {
                                     CustomLogger.trace("tap add");
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.all(2),
+                                    padding: const EdgeInsets.all(2),
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                           color: AppColors.primaryColorDefault,
                                         ),
                                         shape: BoxShape.circle),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.add,
                                       color: AppColors.primaryColorDefault,
                                     ),
@@ -252,7 +247,7 @@ class CartView extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         height: kBottomNavigationBarHeight + 40,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: appHorizontalPadding,
         ),
         decoration: BoxDecoration(boxShadow: [

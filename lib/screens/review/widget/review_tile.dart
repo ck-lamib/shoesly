@@ -11,7 +11,7 @@ class ReviewTile extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only(bottom: 30),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -47,11 +47,11 @@ class ReviewTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 getRatingCount(userRating: 5),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(

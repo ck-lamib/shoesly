@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shoesly/screens/filter/bloc/filter_bloc.dart';
 import 'package:shoesly/screens/review/widget/review_tile.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
-import 'package:shoesly/utils/constants/enums.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
-import 'package:shoesly/utils/theme/colors.dart';
-import 'package:shoesly/utils/theme/typography/font_weights.dart';
 import 'package:shoesly/widgets/custom_app_bar.dart';
 
 class ReviewScreen extends StatelessWidget {
@@ -60,7 +55,7 @@ class ReviewView extends StatelessWidget {
               floating: true,
               flexibleSpace: Container(
                 alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: appHorizontalPadding,
                 ),
                 child: const TabBar(
@@ -108,7 +103,7 @@ class ReviewView extends StatelessWidget {
               ),
             ),
             SliverPadding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: appHorizontalPadding,
                 vertical: appHorizontalPadding / 2,
               ),

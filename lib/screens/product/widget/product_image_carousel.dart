@@ -40,7 +40,7 @@ class ProductImageCarousel extends StatelessWidget {
                     padEnds: true,
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: appHorizontalPadding / 2,
                         ),
                         child: Image.asset(
@@ -49,7 +49,7 @@ class ProductImageCarousel extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: appHorizontalPadding / 2,
                         ),
                         child: Image.asset(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/screens/cart/views/cart_screen.dart';
 import 'package:shoesly/screens/filter/views/filter_screen.dart';
@@ -24,8 +23,8 @@ class DiscoverView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    // var height = MediaQuery.sizeOf(context).height;
+    // var width = MediaQuery.sizeOf(context).width;
     return DefaultTabController(
       length: 7,
       child: Scaffold(
@@ -35,7 +34,7 @@ class DiscoverView extends StatelessWidget {
               SliverAppBar(
                 automaticallyImplyLeading: false,
                 flexibleSpace: Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     top: appHorizontalPadding / 2,
                     left: appHorizontalPadding,
                     right: appHorizontalPadding,
@@ -67,7 +66,7 @@ class DiscoverView extends StatelessWidget {
                 pinned: false,
                 flexibleSpace: Container(
                   alignment: Alignment.bottomCenter,
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: appHorizontalPadding,
                   ),
                   child: TabBar(
@@ -115,7 +114,7 @@ class DiscoverView extends StatelessWidget {
                 ),
               ),
               SliverPadding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: appHorizontalPadding,
                   vertical: appHorizontalPadding / 2,
                 ),
@@ -127,7 +126,7 @@ class DiscoverView extends StatelessWidget {
                     childAspectRatio: 0.65,
                   ),
                   itemBuilder: (context, index) {
-                    return ProductListPotraitTile();
+                    return const ProductListPotraitTile();
                   },
                 ),
               ),

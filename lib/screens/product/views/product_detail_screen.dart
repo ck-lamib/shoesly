@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -47,8 +46,8 @@ class ProductDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    // var height = MediaQuery.sizeOf(context).height;
+    // var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
@@ -59,7 +58,7 @@ class ProductDetailView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: appHorizontalPadding,
           ),
           child: Column(
@@ -182,7 +181,7 @@ class ProductDetailView extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         height: kBottomNavigationBarHeight + 40,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: appHorizontalPadding,
         ),
         decoration: BoxDecoration(boxShadow: [
@@ -263,7 +262,7 @@ class ProductDetailView extends StatelessWidget {
                     width: 3,
                   ),
                   shape: BoxShape.circle),
-              child: Center(
+              child: const Center(
                 child: Icon(
                   Icons.check_rounded,
                   size: 50,
@@ -272,7 +271,7 @@ class ProductDetailView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -281,17 +280,17 @@ class ProductDetailView extends StatelessWidget {
                 fontWeight: AppFontWeight.semiBold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
               "1 item Total",
               style: theme.textTheme.bodyLarge,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Container(
+            SizedBox(
               height: kBottomNavigationBarHeight,
               child: Row(
                 children: [
@@ -303,7 +302,7 @@ class ProductDetailView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Expanded(
@@ -392,19 +391,19 @@ class ProductDetailView extends StatelessWidget {
                             CustomLogger.trace("tap remove");
                           },
                           child: Container(
-                            padding: EdgeInsets.all(2),
+                            padding: const EdgeInsets.all(2),
                             decoration: BoxDecoration(
                                 border: Border.all(
                                   color: AppColors.primaryColorLighter,
                                 ),
                                 shape: BoxShape.circle),
-                            child: Icon(
+                            child: const Icon(
                               Icons.remove,
                               color: AppColors.primaryColorLighter,
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 15,
                         ),
                         GestureDetector(
@@ -412,13 +411,13 @@ class ProductDetailView extends StatelessWidget {
                             CustomLogger.trace("tap add");
                           },
                           child: Container(
-                            padding: EdgeInsets.all(2),
+                            padding: const EdgeInsets.all(2),
                             decoration: BoxDecoration(
                                 border: Border.all(
                                   color: AppColors.primaryColorDefault,
                                 ),
                                 shape: BoxShape.circle),
-                            child: Icon(
+                            child: const Icon(
                               Icons.add,
                               color: AppColors.primaryColorDefault,
                             ),
@@ -427,7 +426,7 @@ class ProductDetailView extends StatelessWidget {
                       ],
                     )),
               ),
-              Container(
+              SizedBox(
                 height: kBottomNavigationBarHeight + 40,
                 child: Row(
                   children: [

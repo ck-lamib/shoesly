@@ -47,7 +47,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       color: backgroundColor,
       padding:
-          padding ?? EdgeInsets.symmetric(horizontal: appHorizontalPadding),
+          padding ?? const EdgeInsets.symmetric(horizontal: appHorizontalPadding),
       child: AppBar(
         scrolledUnderElevation: 0,
         leading: leading ??
