@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,8 +8,10 @@ import 'package:shoesly/screens/product/cubit/product_image_carousel/product_ima
 import 'package:shoesly/screens/product/cubit/product_size_picker/product_size_picker_cubit.dart';
 import 'package:shoesly/screens/product/widget/product_image_carousel.dart';
 import 'package:shoesly/screens/product/widget/product_size_picker.dart';
-import 'package:shoesly/screens/product/widget/review_tile.dart';
+import 'package:shoesly/screens/review/views/review_screen.dart';
+import 'package:shoesly/screens/review/widget/review_tile.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
+import 'package:shoesly/utils/helpers/logger.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
 import 'package:shoesly/utils/theme/colors.dart';
 import 'package:shoesly/utils/theme/typography/font_weights.dart';
@@ -30,13 +33,16 @@ class ProductDetailScreen extends StatelessWidget {
           create: (context) => ProductSizePickerCubit(),
         ),
       ],
-      child: const ProductDetailView(),
+      child: ProductDetailView(),
     );
   }
 }
 
 class ProductDetailView extends StatelessWidget {
-  const ProductDetailView({super.key});
+  ProductDetailView({super.key});
+
+  final TextEditingController quantityController =
+      TextEditingController(text: "1");
 
   @override
   Widget build(BuildContext context) {
@@ -151,14 +157,18 @@ class ProductDetailView extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              ReviewTile(),
-              ReviewTile(),
-              ReviewTile(),
+              const ReviewTile(),
+              const ReviewTile(),
+              const ReviewTile(),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  minimumSize: Size.fromHeight(50),
+                  minimumSize: const Size.fromHeight(50),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    ReviewScreen.routeName,
+                  );
+                },
                 child: Text(
                   "See all reviews".toUpperCase(),
                 ),
@@ -177,7 +187,7 @@ class ProductDetailView extends StatelessWidget {
         ),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
             blurStyle: BlurStyle.outer,
             blurRadius: 30,
             color: AppColors.shadowColor.withOpacity(0.5),
@@ -197,7 +207,7 @@ class ProductDetailView extends StatelessWidget {
                       color: AppColors.primaryColorLighter,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text.rich(
@@ -216,11 +226,250 @@ class ProductDetailView extends StatelessWidget {
             ),
             Expanded(
               child: ElevatedButton(
-                onPressed: () {},
-                child: Text("Add to cart"),
+                onPressed: () {
+                  addedToCartBottomSheet(context);
+                },
+                child: const Text("Add to cart"),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Future<dynamic> addedToCartBottomSheet(BuildContext context) {
+    var theme = Theme.of(context);
+    return showModalBottomSheet(
+      backgroundColor: AppColors.whiteColor,
+      barrierColor: AppColors.primaryColorDefault.withOpacity(0.3),
+      context: context,
+      builder: (context) => Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 30,
+          horizontal: 30,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: AppColors.primaryColorDefault,
+                    width: 3,
+                  ),
+                  shape: BoxShape.circle),
+              child: Center(
+                child: Icon(
+                  Icons.check_rounded,
+                  size: 50,
+                  weight: 2,
+                  color: AppColors.primaryColorLighter,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Added to cart",
+              style: theme.textTheme.headlineMedium?.copyWith(
+                fontWeight: AppFontWeight.semiBold,
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "1 item Total",
+              style: theme.textTheme.bodyLarge,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: kBottomNavigationBarHeight,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Back Explore".toUpperCase(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                        "To cart".toUpperCase(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<dynamic> addToCartBottomSheet(BuildContext context) {
+    var theme = Theme.of(context);
+    return showModalBottomSheet(
+      backgroundColor: AppColors.whiteColor,
+      barrierColor: AppColors.primaryColorDefault.withOpacity(0.3),
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 30,
+        ),
+        child: SingleChildScrollView(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  height: 4,
+                  width: 50,
+                  // margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: AppColors.borderColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Add to cart",
+                    style: theme.textTheme.headlineMedium,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(Icons.close),
+                  ),
+                ],
+              ),
+              Text(
+                "Quantity",
+                style: theme.textTheme.titleLarge,
+              ),
+              TextField(
+                controller: quantityController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    hintText: 'Product Quantity',
+                    enabled: true,
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            CustomLogger.trace("tap remove");
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.primaryColorLighter,
+                                ),
+                                shape: BoxShape.circle),
+                            child: Icon(
+                              Icons.remove,
+                              color: AppColors.primaryColorLighter,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            CustomLogger.trace("tap add");
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.primaryColorDefault,
+                                ),
+                                shape: BoxShape.circle),
+                            child: Icon(
+                              Icons.add,
+                              color: AppColors.primaryColorDefault,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+              Container(
+                height: kBottomNavigationBarHeight + 40,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Price",
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: AppColors.primaryColorLighter,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text.rich(
+                            TextSpan(
+                              text: "\$",
+                              style: theme.textTheme.headlineMedium,
+                              children: const [
+                                TextSpan(
+                                  text: "235,00",
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text("Add to cart"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

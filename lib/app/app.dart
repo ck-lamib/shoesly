@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoesly/screens/filter/bloc/filter_bloc.dart';
 import 'package:shoesly/screens/splash/cubit/splash_cubit.dart';
 import 'package:shoesly/screens/splash/views/splash_screen.dart';
 import 'package:shoesly/utils/routes/app_routes.dart';
@@ -17,9 +18,9 @@ class ShoeslyApp extends StatelessWidget {
         BlocProvider<SplashCubit>(
           create: (context) => SplashCubit(),
         ),
-        // BlocProvider(
-        //   create: (context) => SubjectBloc(),
-        // ),
+        BlocProvider(
+          create: (context) => FilterBloc(),
+        ),
         // BlocProvider(
         //   create: (context) => SubjectBloc(),
         // ),

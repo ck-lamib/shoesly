@@ -34,34 +34,35 @@ class AppTheme {
       // bottomAppBarTheme: _lightBottomAppBarTheme,
       elevatedButtonTheme: _lightElevatedButtonTheme,
       outlinedButtonTheme: _lightOutlinedButtonTheme,
-
+      bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: AppColors.whiteColor,
+          modalBackgroundColor: AppColors.whiteColor,
+          modalBarrierColor: AppColors.primaryColorDefault.withOpacity(0.3),
+          shadowColor: Colors.white),
       inputDecorationTheme: InputDecorationTheme(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+        contentPadding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
         prefixIconColor: AppColors.primaryColorDefault,
         suffixIconColor: AppColors.primaryColorDefault,
         fillColor: AppColors.primaryColorLightest,
         filled: false,
         // suffixIcon: (suffixIcon != null) ? suffixIcon : null,
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+
+        enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryColorDefault,
           ),
         ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+        focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryColorDefault,
           ),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryColorDefault,
           ),
         ),
-        errorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+        errorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.redAccent),
         ),
         errorStyle: const TextStyle(fontSize: 12, color: Colors.redAccent),

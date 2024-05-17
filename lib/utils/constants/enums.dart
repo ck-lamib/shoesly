@@ -35,3 +35,25 @@ enum ProductColors {
     required this.text,
   });
 }
+
+enum SortBy {
+  mostRecent(text: "Most Recent"),
+  lowestPrice(text: "Lowest Price"),
+  highestReview(text: "Highest Review");
+
+  final String text;
+  const SortBy({
+    required this.text,
+  });
+}
+
+enum Genders {
+  man(text: "Man"),
+  woman(text: "Woman"),
+  unisex(text: "Unisex");
+
+  final String text;
+  const Genders({
+    required this.text,
+  });
+}
