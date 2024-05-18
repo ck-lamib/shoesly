@@ -23,23 +23,3 @@ class ConnectionFailure extends Failure {
 class ParsingFailure extends Failure {
   const ParsingFailure(super.message);
 }
-
-class ApiFailure extends Failure {
-  final ApiError? error;
-
-  const ApiFailure(
-    super.message, {
-    this.error,
-  });
-
-  @override
-  List<Object> get props => [message];
-}
-
-class ApiError {
-  final Map<String, dynamic> fieldErrors;
-
-  const ApiError({
-    required this.fieldErrors,
-  });
-}

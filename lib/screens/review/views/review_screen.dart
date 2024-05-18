@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shoesly/models/review_model.dart';
+import 'package:shoesly/screens/review/widget/arguments/review_screen_arg.dart';
 import 'package:shoesly/screens/review/widget/review_tile.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
@@ -11,12 +13,20 @@ class ReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ReviewView();
+    final args =
+        ModalRoute.of(context)!.settings.arguments as ReviewScreenArgument;
+    return ReviewView(
+      reviewScreenArgument: args,
+    );
   }
 }
 
 class ReviewView extends StatelessWidget {
-  const ReviewView({super.key});
+  final ReviewScreenArgument reviewScreenArgument;
+  const ReviewView({
+    super.key,
+    required this.reviewScreenArgument,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +37,7 @@ class ReviewView extends StatelessWidget {
       length: 7,
       child: Scaffold(
         appBar: CustomAppBar(
-          title: "Review(1045)",
+          title: "Review(${reviewScreenArgument.reviews.length})",
           actions: [
             Row(
               children: [
@@ -40,15 +50,15 @@ class ReviewView extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  "4.5",
+                  reviewScreenArgument.averageRating,
                   style: theme.textTheme.titleLarge,
                 ),
               ],
             ),
           ],
         ),
-        body: CustomScrollView(
-          slivers: [
+        body: NestedScrollView(
+          headerSliverBuilder: (context, value) => [
             SliverAppBar(
               automaticallyImplyLeading: false,
               pinned: false,
@@ -101,21 +111,65 @@ class ReviewView extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: appHorizontalPadding,
-                vertical: appHorizontalPadding / 2,
-              ),
-              sliver: SliverList.builder(
-                itemBuilder: (context, index) {
-                  return const ReviewTile();
-                },
-              ),
-            ),
+            )
           ],
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: appHorizontalPadding,
+              vertical: appHorizontalPadding / 2,
+            ),
+            child: TabBarView(
+              children: [
+                //all tabview
+                ReviewTabView(
+                  reveiwList: reviewScreenArgument.reviews,
+                ),
+                ReviewTabView(
+                  reveiwList: [],
+                ),
+                ReviewTabView(
+                  reveiwList: [],
+                ),
+                ReviewTabView(
+                  reveiwList: [],
+                ),
+                ReviewTabView(
+                  reveiwList: [],
+                ),
+                ReviewTabView(
+                  reveiwList: [],
+                ),
+                ReviewTabView(
+                  reveiwList: [],
+                ),
+              ],
+            ),
+          ),
         ),
       ),
+    );
+  }
+}
+
+class ReviewTabView extends StatelessWidget {
+  const ReviewTabView({
+    super.key,
+    required this.reveiwList,
+  });
+  final List<Review> reveiwList;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 5,
+      ),
+      itemCount: reveiwList.length,
+      itemBuilder: (context, index) {
+        return ReviewTile(
+          review: Review(),
+        );
+      },
     );
   }
 }

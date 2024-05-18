@@ -8,7 +8,6 @@ import 'package:shoesly/utils/theme/colors.dart';
 import 'package:shoesly/utils/theme/typography/font_weights.dart';
 import 'package:shoesly/widgets/custom_app_bar.dart';
 
-
 class FilterScreen extends StatelessWidget {
   static const String routeName = "/filter-screen";
   const FilterScreen({super.key});
@@ -229,7 +228,7 @@ class FilterView extends StatelessWidget {
                     (sortBy) {
                       return BlocBuilder<FilterBloc, FilterState>(
                         builder: (context, state) {
-                          return state.filteredSortBy.contains(sortBy)
+                          return state.filteredSortBy == (sortBy)
                               ? Container(
                                   margin: const EdgeInsets.only(right: 20),
                                   child: ElevatedButton(
@@ -280,7 +279,7 @@ class FilterView extends StatelessWidget {
                     (gender) {
                       return BlocBuilder<FilterBloc, FilterState>(
                         builder: (context, state) {
-                          return state.filteredGenders.contains(gender)
+                          return state.filteredGenders == (gender)
                               ? Container(
                                   margin: const EdgeInsets.only(right: 20),
                                   child: ElevatedButton(

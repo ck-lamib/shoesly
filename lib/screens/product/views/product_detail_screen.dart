@@ -3,11 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:shoesly/models/product_model.dart';
+import 'package:shoesly/models/review_model.dart';
 import 'package:shoesly/screens/product/cubit/product_image_carousel/product_image_carousel_cubit.dart';
 import 'package:shoesly/screens/product/cubit/product_size_picker/product_size_picker_cubit.dart';
+import 'package:shoesly/screens/product/widget/arguments/product_detail_screen_arg.dart';
 import 'package:shoesly/screens/product/widget/product_image_carousel.dart';
 import 'package:shoesly/screens/product/widget/product_size_picker.dart';
 import 'package:shoesly/screens/review/views/review_screen.dart';
+import 'package:shoesly/screens/review/widget/arguments/review_screen_arg.dart';
 import 'package:shoesly/screens/review/widget/review_tile.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
 import 'package:shoesly/utils/helpers/logger.dart';
@@ -23,6 +27,8 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments
+        as ProductDetailScreenArgument;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -32,13 +38,19 @@ class ProductDetailScreen extends StatelessWidget {
           create: (context) => ProductSizePickerCubit(),
         ),
       ],
-      child: ProductDetailView(),
+      child: ProductDetailView(
+        productModel: args.productModel,
+      ),
     );
   }
 }
 
 class ProductDetailView extends StatelessWidget {
-  ProductDetailView({super.key});
+  final ProductModel productModel;
+  ProductDetailView({
+    super.key,
+    required this.productModel,
+  });
 
   final TextEditingController quantityController =
       TextEditingController(text: "1");
@@ -65,12 +77,15 @@ class ProductDetailView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ProductImageCarousel(),
+              ProductImageCarousel(
+                colors: productModel.colors ?? [],
+                images: productModel.images ?? [],
+              ),
               const SizedBox(
                 height: 30,
               ),
               Text(
-                "Jordan 1 Retro High Tie Dye",
+                productModel.name ?? "--:--",
                 style: theme.textTheme.headlineMedium,
               ),
               const SizedBox(
@@ -79,13 +94,15 @@ class ProductDetailView extends StatelessWidget {
               Row(
                 children: [
                   getRatingCount(
-                    userRating: 3,
+                    userRating: productModel.averageRating?.toInt() ?? 0,
                   ),
                   const SizedBox(
                     width: 5,
                   ),
                   Text(
-                    "4.5",
+                    productModel.averageRating == null
+                        ? "--:--"
+                        : productModel.averageRating.toString(),
                     style: theme.textTheme.titleSmall,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -94,7 +111,7 @@ class ProductDetailView extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    "(1045 Reviews)",
+                    "(${productModel.reviews?.length ?? 0} Reviews)",
                     style: theme.textTheme.bodySmall
                         ?.copyWith(color: AppColors.primaryColorLighter),
                     maxLines: 1,
@@ -116,10 +133,10 @@ class ProductDetailView extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 50,
                 child: ProductSizePicker(
-                  sizes: [39, 39.5, 40, 40.5, 41],
+                  sizes: productModel.sizes ?? [],
                 ),
               ),
               const SizedBox(
@@ -137,7 +154,7 @@ class ProductDetailView extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "Engineered to crush any movement-based workout, these On sneakers enhance the label's original Cloud sneaker with cutting edge technologies for a pair. ",
+                productModel.description ?? "--:--",
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: AppColors.primaryColorLight,
                 ),
@@ -146,7 +163,7 @@ class ProductDetailView extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                "Review (1045)",
+                "Review (${productModel.reviews?.length ?? 0})",
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: AppFontWeight.semiBold,
                 ),
@@ -156,21 +173,15 @@ class ProductDetailView extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const ReviewTile(),
-              const ReviewTile(),
-              const ReviewTile(),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(
-                    ReviewScreen.routeName,
-                  );
-                },
-                child: Text(
-                  "See all reviews".toUpperCase(),
-                ),
+              ReviewView(
+                reviews: productModel.reviews ??
+                    [
+                      Review(),
+                      Review(),
+                    ],
+                averageRating: productModel.averageRating == null
+                    ? "--:--"
+                    : productModel.averageRating.toString(),
               ),
               const SizedBox(
                 height: 30,
@@ -472,5 +483,55 @@ class ProductDetailView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class ReviewView extends StatelessWidget {
+  final List<Review> reviews;
+  final String averageRating;
+  const ReviewView({
+    super.key,
+    required this.reviews,
+    required this.averageRating,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    return reviews.isEmpty
+        ? Container(
+            margin: const EdgeInsets.only(right: 15),
+            alignment: Alignment.center,
+            child: Text(
+              "No reviews available",
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: AppColors.primaryColorLight,
+              ),
+            ),
+          )
+        : Column(
+            children: [
+              ...reviews.map((e) => ReviewTile(
+                    review: e,
+                  )),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(50),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    ReviewScreen.routeName,
+                    arguments: ReviewScreenArgument(
+                      averageRating: averageRating,
+                      reviews: reviews,
+                    ),
+                  );
+                },
+                child: Text(
+                  "See all reviews".toUpperCase(),
+                ),
+              ),
+            ],
+          );
   }
 }

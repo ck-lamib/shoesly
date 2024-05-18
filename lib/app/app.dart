@@ -21,6 +21,7 @@ class ShoeslyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FilterBloc(),
         ),
+
         // BlocProvider(
         //   create: (context) => SubjectBloc(),
         // ),

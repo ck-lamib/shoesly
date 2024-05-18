@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
 import 'package:shoesly/utils/theme/colors.dart';
 
+enum AppProgressStatus { initial, loading, success, failure }
+
 enum Brands {
   all(name: "All", logoPath: ""),
   adidas(name: "Adidas", logoPath: AppAssetsRoutes.adidasBrandPath),

@@ -4,15 +4,15 @@ class FilterState extends Equatable {
   final List<Brands> filteredBrands;
   final int filteredRangeStart;
   final int filteredRangeEnd;
-  final List<SortBy> filteredSortBy;
-  final List<Genders> filteredGenders;
+  final SortBy? filteredSortBy;
+  final Genders? filteredGenders;
   final List<ProductColors> filteredProductColors;
   const FilterState({
     this.filteredBrands = const [],
     this.filteredRangeStart = 0,
     this.filteredRangeEnd = 0,
-    this.filteredSortBy = const [],
-    this.filteredGenders = const [],
+    this.filteredSortBy,
+    this.filteredGenders,
     this.filteredProductColors = const [],
   });
 
@@ -20,8 +20,8 @@ class FilterState extends Equatable {
     List<Brands>? filteredBrands,
     int? filteredRangeStart,
     int? filteredRangeEnd,
-    List<SortBy>? filteredSortBy,
-    List<Genders>? filteredGenders,
+    SortBy? filteredSortBy,
+    Genders? filteredGenders,
     List<ProductColors>? filteredProductColors,
   }) {
     return FilterState(
@@ -40,8 +40,8 @@ class FilterState extends Equatable {
         filteredBrands,
         filteredRangeStart,
         filteredRangeEnd,
-        filteredSortBy,
-        filteredGenders,
+        filteredSortBy ?? '',
+        filteredGenders ?? '',
         filteredProductColors,
       ];
 }

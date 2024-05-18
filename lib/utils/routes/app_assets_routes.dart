@@ -18,6 +18,7 @@ class AppAssetsRoutes {
 
   // assets/images/
   static const String imagesPath = "assets/images";
-  static const String shoesPath = "assets/images/shoes.png";
-  static const String brandPath = "assets/images/brand.png";
+  static const String shoesPath = "$imagesPath/shoes.png";
+  static const String brandPath = "$imagesPath/brand.png";
+  static const String defaultAvatarPath = "$imagesPath/default_avatar.png";
 }

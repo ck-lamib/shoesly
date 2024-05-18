@@ -39,28 +39,28 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
 
   FutureOr<void> _onFilterBySortBySelected(
       FilterBySortBySelected event, Emitter<FilterState> emit) {
-    final filteredSortBy = List<SortBy>.from(state.filteredSortBy);
+    // final filteredSortBy = List<SortBy>.from(state.filteredSortBy);
 
-    if (filteredSortBy.contains(event.sortBy)) {
-      filteredSortBy.remove(event.sortBy);
-    } else {
-      filteredSortBy.add(event.sortBy);
-    }
+    // if (filteredSortBy.contains(event.sortBy)) {
+    //   filteredSortBy.remove(event.sortBy);
+    // } else {
+    //   filteredSortBy.add(event.sortBy);
+    // }
 
-    emit(state.copyWith(filteredSortBy: filteredSortBy));
+    emit(state.copyWith(filteredSortBy: event.sortBy));
   }
 
   FutureOr<void> _onFilterByGendersSelected(
       FilterByGendersSelected event, Emitter<FilterState> emit) {
-    final filteredGenders = List<Genders>.from(state.filteredGenders);
+    // final filteredGenders = List<Genders>.from(state.filteredGenders);
 
-    if (filteredGenders.contains(event.gender)) {
-      filteredGenders.remove(event.gender);
-    } else {
-      filteredGenders.add(event.gender);
-    }
+    // if (filteredGenders.contains(event.gender)) {
+    //   filteredGenders.remove(event.gender);
+    // } else {
+    //   filteredGenders.add(event.gender);
+    // }
 
-    emit(state.copyWith(filteredGenders: filteredGenders));
+    emit(state.copyWith(filteredGenders: event.gender));
   }
 
   FutureOr<void> _onFilterByProductColorsSelected(

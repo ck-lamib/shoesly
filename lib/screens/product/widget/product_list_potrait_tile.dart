@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shoesly/models/product_model.dart';
 import 'package:shoesly/screens/product/views/product_detail_screen.dart';
+import 'package:shoesly/screens/product/widget/arguments/product_detail_screen_arg.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
+import 'package:shoesly/utils/constants/extensions.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
 import 'package:shoesly/utils/theme/colors.dart';
+import 'package:shoesly/widgets/custom_cached_netwoking.dart';
 
 class ProductListPotraitTile extends StatelessWidget {
   const ProductListPotraitTile({
     super.key,
+    required this.productModel,
   });
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(ProductDetailScreen.routeName);
+        Navigator.of(context).pushNamed(
+          ProductDetailScreen.routeName,
+          arguments: ProductDetailScreenArgument(productModel: productModel),
+        );
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -39,7 +48,8 @@ class ProductListPotraitTile extends StatelessWidget {
                       height: 20,
                       width: 20,
                       child: SvgPicture.asset(
-                        AppAssetsRoutes.adidasBrandPath,
+                        productModel.brand?.logoPath ??
+                            AppAssetsRoutes.nikeBrandPath,
                         colorFilter: const ColorFilter.mode(
                           AppColors.primaryColorLighter,
                           BlendMode.srcIn,
@@ -51,10 +61,10 @@ class ProductListPotraitTile extends StatelessWidget {
                     ),
                     SizedBox(
                       width: constraint.maxWidth,
-                      // width: 25,
-                      child: Image.asset(
-                        AppAssetsRoutes.shoesPath,
-                        fit: BoxFit.contain,
+                      child: CustomCachedNetworkImage(
+                        imageUrl: productModel.images?.first ?? "",
+                        width: constraint.maxWidth,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ],
@@ -66,7 +76,7 @@ class ProductListPotraitTile extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "Jordan 1 Retro High Tie Dye laksd flasd",
+            productModel.name ?? "--:--",
             style: theme.textTheme.bodyMedium?.copyWith(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -85,7 +95,9 @@ class ProductListPotraitTile extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                "4.5",
+                productModel.averageRating == null
+                    ? "--:--"
+                    : productModel.averageRating.toString(),
                 style: theme.textTheme.titleSmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -94,7 +106,7 @@ class ProductListPotraitTile extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                "(1045 Reviews)",
+                "(${productModel.reviews?.length ?? 0} Reviews)",
                 style: theme.textTheme.bodySmall
                     ?.copyWith(color: AppColors.primaryColorLighter),
                 maxLines: 1,
@@ -109,9 +121,11 @@ class ProductListPotraitTile extends StatelessWidget {
             TextSpan(
               text: "\$",
               style: theme.textTheme.titleLarge,
-              children: const [
+              children: [
                 TextSpan(
-                  text: "235,00",
+                  text: productModel.price == null
+                      ? "--:--"
+                      : productModel.price.toString(),
                 ),
               ],
             ),

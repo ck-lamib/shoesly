@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/svg.dart';
+
+import 'package:shoesly/models/product_model.dart';
 import 'package:shoesly/screens/cart/views/cart_screen.dart';
 import 'package:shoesly/screens/filter/views/filter_screen.dart';
 import 'package:shoesly/screens/product/widget/product_list_potrait_tile.dart';
@@ -22,6 +25,7 @@ class DiscoverView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // productService.fetchProducts();
     var theme = Theme.of(context);
     // var height = MediaQuery.sizeOf(context).height;
     // var width = MediaQuery.sizeOf(context).width;
@@ -113,21 +117,38 @@ class DiscoverView extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: appHorizontalPadding,
-                  vertical: appHorizontalPadding / 2,
-                ),
-                sliver: SliverGrid.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15,
-                    // mainAxisSpacing: 30,
-                    childAspectRatio: 0.65,
+              const SliverFillRemaining(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: appHorizontalPadding,
+                    vertical: appHorizontalPadding / 2,
                   ),
-                  itemBuilder: (context, index) {
-                    return const ProductListPotraitTile();
-                  },
+                  child: TabBarView(
+                    children: [
+                      //all tabview
+                      DiscoverTabView(
+                        productModelList: [],
+                      ),
+                      DiscoverTabView(
+                        productModelList: [],
+                      ),
+                      DiscoverTabView(
+                        productModelList: [],
+                      ),
+                      DiscoverTabView(
+                        productModelList: [],
+                      ),
+                      DiscoverTabView(
+                        productModelList: [],
+                      ),
+                      DiscoverTabView(
+                        productModelList: [],
+                      ),
+                      DiscoverTabView(
+                        productModelList: [],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -144,6 +165,33 @@ class DiscoverView extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class DiscoverTabView extends StatelessWidget {
+  const DiscoverTabView({
+    super.key,
+    required this.productModelList,
+  });
+  final ProductModelList productModelList;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 15,
+        childAspectRatio: 0.65,
+      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 5,
+      ),
+      itemBuilder: (context, index) {
+        return ProductListPotraitTile(
+          productModel: ProductModel(),
+        );
+      },
     );
   }
 }
