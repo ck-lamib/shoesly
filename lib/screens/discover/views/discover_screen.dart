@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
 
 import 'package:shoesly/models/product_model.dart';
 import 'package:shoesly/screens/cart/views/cart_screen.dart';
 import 'package:shoesly/screens/filter/views/filter_screen.dart';
+import 'package:shoesly/screens/product/bloc/product_bloc.dart';
 import 'package:shoesly/screens/product/widget/product_list_potrait_tile.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
 import 'package:shoesly/utils/constants/enums.dart';
@@ -117,35 +119,57 @@ class DiscoverView extends StatelessWidget {
                   ),
                 ),
               ),
-              const SliverFillRemaining(
+              SliverFillRemaining(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: appHorizontalPadding,
                     vertical: appHorizontalPadding / 2,
                   ),
                   child: TabBarView(
                     children: [
                       //all tabview
-                      DiscoverTabView(
-                        productModelList: [],
+                      const AllDiscoverTabView(),
+                      BlocBuilder<ProductBloc, ProductState>(
+                        builder: (context, state) {
+                          return DiscoverTabView(
+                            productModelList: [...state.adidasProducts],
+                          );
+                        },
                       ),
-                      DiscoverTabView(
-                        productModelList: [],
+                      BlocBuilder<ProductBloc, ProductState>(
+                        builder: (context, state) {
+                          return DiscoverTabView(
+                            productModelList: [...state.jordanProducts],
+                          );
+                        },
                       ),
-                      DiscoverTabView(
-                        productModelList: [],
+                      BlocBuilder<ProductBloc, ProductState>(
+                        builder: (context, state) {
+                          return DiscoverTabView(
+                            productModelList: [...state.nikeProducts],
+                          );
+                        },
                       ),
-                      DiscoverTabView(
-                        productModelList: [],
+                      BlocBuilder<ProductBloc, ProductState>(
+                        builder: (context, state) {
+                          return DiscoverTabView(
+                            productModelList: [...state.pumaProducts],
+                          );
+                        },
                       ),
-                      DiscoverTabView(
-                        productModelList: [],
+                      BlocBuilder<ProductBloc, ProductState>(
+                        builder: (context, state) {
+                          return DiscoverTabView(
+                            productModelList: [...state.reebokProducts],
+                          );
+                        },
                       ),
-                      DiscoverTabView(
-                        productModelList: [],
-                      ),
-                      DiscoverTabView(
-                        productModelList: [],
+                      BlocBuilder<ProductBloc, ProductState>(
+                        builder: (context, state) {
+                          return DiscoverTabView(
+                            productModelList: [...state.vansProducts],
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -187,10 +211,82 @@ class DiscoverTabView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: 5,
       ),
+      itemCount: productModelList.length,
       itemBuilder: (context, index) {
         return ProductListPotraitTile(
-          productModel: ProductModel(),
+          productModel: productModelList[index],
         );
+      },
+    );
+  }
+}
+
+class AllDiscoverTabView extends StatefulWidget {
+  const AllDiscoverTabView({
+    super.key,
+  });
+
+  @override
+  State<AllDiscoverTabView> createState() => _AllDiscoverTabViewState();
+}
+
+class _AllDiscoverTabViewState extends State<AllDiscoverTabView> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    _scrollController.addListener(
+      () {
+        if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent) {
+          BlocProvider.of<ProductBloc>(context).add(ProductFetched());
+        }
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProductBloc, ProductState>(
+      builder: (context, state) {
+        if (state.productFetchedStatus == AppProgressStatus.success) {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 15,
+              childAspectRatio: 0.65,
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+            ),
+            itemCount: state.allProducts.length,
+            // state.hasReachedMax
+            //     ? state.allProducts.length
+            //     : state.allProducts.length + 1,
+            controller: _scrollController,
+            itemBuilder: (context, index) {
+              // print(state.allProducts[index].name);
+              // if (index >= state.allProducts.length) {
+              //   // Show a loading indicator
+              //   return const Center(
+              //     child: CircularProgressIndicator(),
+              //   );
+              // }
+              return ProductListPotraitTile(
+                productModel: state.allProducts[index],
+              );
+            },
+          );
+        } else if (state.productFetchedStatus == AppProgressStatus.failure) {
+          return Center(
+            child: Text(state.productFetchedError),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
       },
     );
   }

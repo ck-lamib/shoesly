@@ -11,6 +11,8 @@ class ProductState extends Equatable {
   final List<ProductModel> reebokProducts;
   final List<ProductModel> vansProducts;
   final String productFetchedError;
+  final int currentPage;
+  final bool hasReachedMax;
   const ProductState({
     this.productFetchedStatus = AppProgressStatus.initial,
     this.allProducts = const [],
@@ -22,6 +24,8 @@ class ProductState extends Equatable {
     this.reebokProducts = const [],
     this.vansProducts = const [],
     this.productFetchedError = "",
+    this.currentPage = 1,
+    this.hasReachedMax = false,
   });
 
   ProductState copyWith({
@@ -35,6 +39,9 @@ class ProductState extends Equatable {
     List<ProductModel>? reebokProducts,
     List<ProductModel>? vansProducts,
     String? productFetchedError,
+    int? currentPage,
+    int? totalPages,
+    bool? hasReachedMax,
   }) {
     return ProductState(
       productFetchedStatus: productFetchedStatus ?? this.productFetchedStatus,
@@ -47,6 +54,8 @@ class ProductState extends Equatable {
       reebokProducts: reebokProducts ?? this.reebokProducts,
       vansProducts: vansProducts ?? this.vansProducts,
       productFetchedError: productFetchedError ?? this.productFetchedError,
+      currentPage: currentPage ?? this.currentPage,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }
 
@@ -62,5 +71,7 @@ class ProductState extends Equatable {
         reebokProducts,
         vansProducts,
         productFetchedError,
+        currentPage,
+        hasReachedMax,
       ];
 }

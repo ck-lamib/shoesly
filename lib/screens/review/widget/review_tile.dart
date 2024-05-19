@@ -31,7 +31,7 @@ class ReviewTile extends StatelessWidget {
                   color: AppColors.primaryColorLighter,
                 )),
             clipBehavior: Clip.antiAlias,
-            child: CustomCachedNetworkImage(
+            child: const CustomCachedNetworkImage(
               imageUrl: "imageUrl",
               placeHolderImage: AppAssetsRoutes.defaultAvatarPath,
             ),

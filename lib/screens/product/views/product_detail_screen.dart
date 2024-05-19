@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/models/product_model.dart';
 import 'package:shoesly/models/review_model.dart';
+import 'package:shoesly/screens/cart/views/cart_screen.dart';
 import 'package:shoesly/screens/product/cubit/product_image_carousel/product_image_carousel_cubit.dart';
 import 'package:shoesly/screens/product/cubit/product_size_picker/product_size_picker_cubit.dart';
 import 'package:shoesly/screens/product/widget/arguments/product_detail_screen_arg.dart';
@@ -237,7 +238,7 @@ class ProductDetailView extends StatelessWidget {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  addedToCartBottomSheet(context);
+                  addToCartBottomSheet(context);
                 },
                 child: const Text("Add to cart"),
               ),
@@ -307,7 +308,9 @@ class ProductDetailView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       child: Text(
                         "Back Explore".toUpperCase(),
                       ),
@@ -318,7 +321,10 @@ class ProductDetailView extends StatelessWidget {
                   ),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pushNamed(CartScreen.routeName);
+                      },
                       child: Text(
                         "To cart".toUpperCase(),
                       ),
@@ -471,7 +477,10 @@ class ProductDetailView extends StatelessWidget {
                     ),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          addedToCartBottomSheet(context);
+                        },
                         child: const Text("Add to cart"),
                       ),
                     ),

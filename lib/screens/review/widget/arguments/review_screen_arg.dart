@@ -1,4 +1,3 @@
-import 'package:shoesly/models/product_model.dart';
 import 'package:shoesly/models/review_model.dart';
 
 class ReviewScreenArgument {

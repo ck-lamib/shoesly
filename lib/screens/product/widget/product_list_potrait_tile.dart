@@ -4,7 +4,6 @@ import 'package:shoesly/models/product_model.dart';
 import 'package:shoesly/screens/product/views/product_detail_screen.dart';
 import 'package:shoesly/screens/product/widget/arguments/product_detail_screen_arg.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
-import 'package:shoesly/utils/constants/extensions.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
 import 'package:shoesly/utils/theme/colors.dart';
 import 'package:shoesly/widgets/custom_cached_netwoking.dart';

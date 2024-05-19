@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/utils/routes/app_assets_routes.dart';
 
 class CustomCachedNetworkImage extends StatelessWidget {

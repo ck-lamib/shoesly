@@ -6,6 +6,7 @@ import 'package:shoesly/app/get_dependencies.dart';
 import 'package:shoesly/models/filter_model.dart';
 import 'package:shoesly/models/product_model.dart';
 import 'package:shoesly/utils/constants/enums.dart';
+import 'package:shoesly/utils/helpers/logger.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';
@@ -14,27 +15,38 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc() : super(const ProductState()) {
     on<ProductFetched>(_onProductFetched);
     on<ProductFilterApplied>(_onProductFilterApplied);
-    on<ProductFilterRemoved>(_onProductFilterRemoved); // New event handler
+    on<ProductFilterRemoved>(_onProductFilterRemoved);
   }
 
   FutureOr<void> _onProductFetched(
       ProductFetched event, Emitter<ProductState> emit) async {
+    const pageSize = 10;
+    if (state.hasReachedMax) return;
+
     try {
-      // Fetch all products from your data source
-      final allProducts = await productService.fetchProducts();
+      final allProducts = await productService.fetchProducts(
+        pageNumber: state.currentPage,
+        pageSize: pageSize,
+      );
 
       allProducts.fold(
         (error) {
-          emit(
+          return emit(
             state.copyWith(
               productFetchedStatus: AppProgressStatus.failure,
               productFetchedError: error.message,
+              hasReachedMax: false,
             ),
           );
         },
         (data) {
-          final allProducts = data;
-          // Filter products based on brand
+          final List<ProductModel> allProducts =
+              state.currentPage == 1 ? data : [...state.allProducts, ...data];
+
+          final hasReachedMax = data.length < pageSize;
+          final nextPage = state.currentPage + 1;
+          CustomLogger.trace(
+              "max reached: $hasReachedMax  and  nextpage $nextPage");
           final adidasProducts = allProducts
               .where((product) => product.brand == Brands.adidas)
               .toList();
@@ -53,11 +65,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           final vansProducts = allProducts
               .where((product) => product.brand == Brands.vans)
               .toList();
-
-          emit(
+          return emit(
             state.copyWith(
               productFetchedStatus: AppProgressStatus.success,
               allProducts: allProducts,
+              currentPage: nextPage,
+              hasReachedMax: hasReachedMax,
               adidasProducts: adidasProducts,
               jordanProducts: jordanProducts,
               nikeProducts: nikeProducts,
@@ -77,6 +90,140 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         ),
       );
     }
+
+    // try {
+    //   // Fetch all products from your data source
+    //   const pageSize = 10;
+    //   if (state.productFetchedStatus == AppProgressStatus.initial) {
+    //     final allProducts = await productService.fetchProducts(
+    //       pageNumber: 1,
+    //       pageSize: pageSize,
+    //     );
+    //     allProducts.fold(
+    //       (error) {
+    //         return emit(
+    //           state.copyWith(
+    //             productFetchedStatus: AppProgressStatus.failure,
+    //             productFetchedError: error.message,
+    //             hasReachedMax: false,
+    //             currentPage: 1,
+    //           ),
+    //         );
+    //       },
+    //       (data) {
+    //         final allProducts = data;
+    //         // Filter products based on brand
+    //         final adidasProducts = allProducts
+    //             .where((product) => product.brand == Brands.adidas)
+    //             .toList();
+    //         final jordanProducts = allProducts
+    //             .where((product) => product.brand == Brands.jordan)
+    //             .toList();
+    //         final nikeProducts = allProducts
+    //             .where((product) => product.brand == Brands.nike)
+    //             .toList();
+    //         final pumaProducts = allProducts
+    //             .where((product) => product.brand == Brands.puma)
+    //             .toList();
+    //         final reebokProducts = allProducts
+    //             .where((product) => product.brand == Brands.reebok)
+    //             .toList();
+    //         final vansProducts = allProducts
+    //             .where((product) => product.brand == Brands.vans)
+    //             .toList();
+
+    //         final hasReachedMax = data.length < pageSize;
+    //         final totalPages = hasReachedMax ? state.currentPage : null;
+
+    //         return emit(
+    //           state.copyWith(
+    //             productFetchedStatus: AppProgressStatus.success,
+    //             allProducts: (state.currentPage ?? 1) == 1
+    //                 ? data
+    //                 : [...state.allProducts, ...data],
+    //             currentPage: state.currentPage ?? 0 + 1,
+    //             totalPages: totalPages,
+    //             hasReachedMax: hasReachedMax,
+    //             adidasProducts: adidasProducts,
+    //             jordanProducts: jordanProducts,
+    //             nikeProducts: nikeProducts,
+    //             pumaProducts: pumaProducts,
+    //             reebokProducts: reebokProducts,
+    //             vansProducts: vansProducts,
+    //             productFetchedError: '',
+    //           ),
+    //         );
+    //       },
+    //     );
+    //   }
+
+    //   final allProducts = await productService.fetchProducts(
+    //     pageNumber: state.currentPage,
+    //     pageSize: pageSize,
+    //   );
+
+    //   allProducts.fold(
+    //     (error) {
+    //       emit(
+    //         state.copyWith(
+    //           productFetchedStatus: AppProgressStatus.failure,
+    //           productFetchedError: error.message,
+    //         ),
+    //       );
+    //     },
+    //     (data) {
+    //       final allProducts = data;
+    //       // Filter products based on brand
+    //       final adidasProducts = allProducts
+    //           .where((product) => product.brand == Brands.adidas)
+    //           .toList();
+    //       final jordanProducts = allProducts
+    //           .where((product) => product.brand == Brands.jordan)
+    //           .toList();
+    //       final nikeProducts = allProducts
+    //           .where((product) => product.brand == Brands.nike)
+    //           .toList();
+    //       final pumaProducts = allProducts
+    //           .where((product) => product.brand == Brands.puma)
+    //           .toList();
+    //       final reebokProducts = allProducts
+    //           .where((product) => product.brand == Brands.reebok)
+    //           .toList();
+    //       final vansProducts = allProducts
+    //           .where((product) => product.brand == Brands.vans)
+    //           .toList();
+
+    //       final hasReachedMax = data.length < pageSize;
+    //       final totalPages = hasReachedMax ? state.currentPage : null;
+
+    //       emit(
+    //         state.copyWith(
+    //           productFetchedStatus: AppProgressStatus.success,
+    //           allProducts: (state.currentPage ?? 1) == 1
+    //               ? data
+    //               : [...state.allProducts, ...data],
+    //           currentPage: state.currentPage ?? 0 + 1,
+    //           totalPages: totalPages,
+    //           hasReachedMax: hasReachedMax,
+    //           adidasProducts: adidasProducts,
+    //           jordanProducts: jordanProducts,
+    //           nikeProducts: nikeProducts,
+    //           pumaProducts: pumaProducts,
+    //           reebokProducts: reebokProducts,
+    //           vansProducts: vansProducts,
+    //           productFetchedError: '',
+    //         ),
+    //       );
+    //     },
+    //   );
+    // } catch (e) {
+    //   emit(
+    //     state.copyWith(
+    //       productFetchedStatus: AppProgressStatus.failure,
+    //       productFetchedError: e.toString(),
+    //     ),
+    //   );
+    // }
   }
 
   FutureOr<void> _onProductFilterApplied(

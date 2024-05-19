@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shoesly/screens/product/cubit/product_image_carousel/product_image_carousel_cubit.dart';
 import 'package:shoesly/utils/constants/app_constants.dart';
-import 'package:shoesly/utils/constants/extensions.dart';
 import 'package:shoesly/utils/theme/colors.dart';
 import 'package:shoesly/widgets/custom_cached_netwoking.dart';
 

@@ -114,7 +114,7 @@ class ReviewView extends StatelessWidget {
             )
           ],
           body: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: appHorizontalPadding,
               vertical: appHorizontalPadding / 2,
             ),
@@ -124,22 +124,22 @@ class ReviewView extends StatelessWidget {
                 ReviewTabView(
                   reveiwList: reviewScreenArgument.reviews,
                 ),
-                ReviewTabView(
+                const ReviewTabView(
                   reveiwList: [],
                 ),
-                ReviewTabView(
+                const ReviewTabView(
                   reveiwList: [],
                 ),
-                ReviewTabView(
+                const ReviewTabView(
                   reveiwList: [],
                 ),
-                ReviewTabView(
+                const ReviewTabView(
                   reveiwList: [],
                 ),
-                ReviewTabView(
+                const ReviewTabView(
                   reveiwList: [],
                 ),
-                ReviewTabView(
+                const ReviewTabView(
                   reveiwList: [],
                 ),
               ],

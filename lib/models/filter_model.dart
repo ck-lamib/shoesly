@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:shoesly/utils/constants/enums.dart';
 
 class ProductFilter {

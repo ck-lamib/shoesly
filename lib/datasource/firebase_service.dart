@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shoesly/app/get_dependencies.dart';
+import 'package:shoesly/utils/helpers/logger.dart';
 
 class FirebaseRemoteService {
   Future<void> addFirestoreDocData({
@@ -37,10 +38,31 @@ class FirebaseRemoteService {
 
   Future<QuerySnapshot<Map<String, dynamic>>> readFirestoreCollectionData({
     required String collectionPath,
-  }) {
-    final result = firebaseFirestore.collection(collectionPath).get();
+    int? pageNumber, // Optional parameter for pagination
+    int? pageSize, // Optional parameter for pagination
+  }) async {
+    Query<Map<String, dynamic>> query =
+        firebaseFirestore.collection(collectionPath);
 
-    return result;
+    // Conditionally adjust the query for pagination
+    if (pageNumber != null && pageSize != null) {
+      int startIndex = (pageNumber - 1) * pageSize;
+      CustomLogger.trace("startafter $startIndex and limit $pageSize");
+      query = query
+          .orderBy('brand')
+          .startAfterDocument(await _getDocumentAtStartIndex(query, startIndex))
+          .limit(pageSize);
+    }
+
+    // Execute the query and return the result
+    // return query.get();
+    return query.get().then((querySnapshot) {
+      CustomLogger.trace("Fetched ${querySnapshot.docs.length} documents");
+      return querySnapshot;
+    }).catchError((error) {
+      CustomLogger.trace("Error fetching Firestore collection: $error");
+      throw error; // Rethrow the error to handle it elsewhere if needed
+    });
   }
 
   Future<void> deleteFirestoreDocData({
@@ -50,6 +72,16 @@ class FirebaseRemoteService {
     final result =
         firebaseFirestore.collection(collectionPath).doc(docPath).delete();
     return result;
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> _getDocumentAtStartIndex(
+      Query<Map<String, dynamic>> query, int startIndex) async {
+    final snapshot = await query.orderBy("brand").limit(startIndex + 1).get();
+    if (snapshot.docs.length > startIndex) {
+      return snapshot.docs[startIndex];
+    } else {
+      throw Exception('No document found at index $startIndex');
+    }
   }
 
   // Future<Either<Failure, String>> uploadImage({
